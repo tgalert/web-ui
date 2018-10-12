@@ -1,6 +1,7 @@
 import {NgModule, Optional, SkipSelf} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AmplifyService } from 'aws-amplify-angular';
+import {AuthService} from './services/auth.service';
 
 
 @NgModule({
@@ -9,7 +10,8 @@ import { AmplifyService } from 'aws-amplify-angular';
   ],
   declarations: [],
   providers: [
-    AmplifyService
+    AmplifyService,
+    AuthService
   ]
 })
 export class CoreModule {
