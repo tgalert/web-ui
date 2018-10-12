@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AmplifyService } from 'aws-amplify-angular';
 import {AuthService} from './services/auth.service';
 import {AuthGuard} from './guards/auth.guard';
+import {NoAuthGuard} from './guards/no-auth.guard';
 
 
 @NgModule({
@@ -11,9 +12,15 @@ import {AuthGuard} from './guards/auth.guard';
   ],
   declarations: [],
   providers: [
+    // Library services
     AmplifyService,
+
+    // Own services
     AuthService,
-    AuthGuard
+
+    // Guards
+    AuthGuard,
+    NoAuthGuard
   ]
 })
 export class CoreModule {
