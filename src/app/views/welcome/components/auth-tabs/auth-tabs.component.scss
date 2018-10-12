@@ -1,4 +1,8 @@
-#auth-tabs-container {
+#tabs-container {
   width: 40em;
+  height: 26em;
   margin: auto;
+  mat-card {
+    height: 100%;
+  }
 }
