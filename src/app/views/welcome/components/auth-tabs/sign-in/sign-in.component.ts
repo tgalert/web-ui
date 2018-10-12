@@ -15,6 +15,8 @@ export class SignInComponent implements OnInit {
 
   signInForm: FormGroup;
 
+  loading = false;
+
   /* Needed in order to programmatically set focus on an input field. See
    * https://github.com/angular/angular/issues/12463 */
   @ViewChild('emailElt') emailElt: ElementRef;
@@ -34,12 +36,15 @@ export class SignInComponent implements OnInit {
   }
 
   onSubmit() {
+    this.loading = true;
     this.authService.signIn(this.email.value, this.password.value).subscribe({
       next: () => {
+        // Note: since we navigate away, we don't need to stop the spinner
         console.log('Sign-in successful');
         this.router.navigate(['/dashboard']);
       },
       error: err => {
+        this.loading = false;
         if (err.code === 'UserNotFoundException') {
           this.emailElt.nativeElement.focus();
           this.email.setErrors([{userNotFound: true}]);

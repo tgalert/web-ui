@@ -1,3 +1,6 @@
+<!-- Loading spinner -->
+<app-fullscreen-spinner *ngIf="loading"></app-fullscreen-spinner>
+
 <div>
   <form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
 
@@ -15,7 +18,7 @@
     </mat-form-field>
 
     <div class="button-container">
-      <button mat-raised-button color="primary" type="submit" [disabled]="signInForm.invalid">Sign In</button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="signInForm.invalid || loading">Sign In</button>
     </div>
 
     <p id="forgot-password">Forgot your password?&nbsp;<a (click)="forgotPassword()">Click here</a></p>
