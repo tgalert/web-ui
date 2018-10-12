@@ -2,8 +2,7 @@
   <mat-card>
     <mat-tab-group mat-stretch-tabs [selectedIndex]="selectedTab" (selectedIndexChange)="onTabChanged($event)">
       <mat-tab label="Sign Up">
-        <app-auth-sign-up></app-auth-sign-up>
-        Already have an account? <a (click)="selectedTab = 1">Sign in</a>
+        <app-auth-sign-up (showSignIn)="selectedTab = 1"></app-auth-sign-up>
       </mat-tab>
       <mat-tab label="Sign In">
         <app-auth-sign-in></app-auth-sign-in>

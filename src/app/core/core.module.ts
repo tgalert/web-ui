@@ -7,6 +7,7 @@ import {NoAuthGuard} from './guards/no-auth.guard';
 import { ErrorDialogComponent } from './components/error-dialog/error-dialog.component';
 import {ErrorService} from './services/error.service';
 import {MaterialModule} from '../shared/material/material.module';
+import {MAT_SNACK_BAR_DEFAULT_OPTIONS} from '@angular/material';
 
 
 // TODO: is it ok to leave ErrorDialogComponent in the core module or should it be put in another module?
@@ -19,6 +20,7 @@ import {MaterialModule} from '../shared/material/material.module';
   providers: [
     // Library services
     AmplifyService,
+    {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2000}},
 
     // Own services
     AuthService,

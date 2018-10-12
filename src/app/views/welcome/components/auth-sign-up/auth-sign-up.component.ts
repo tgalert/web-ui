@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {MatSnackBar} from '@angular/material';
 import {AuthService} from '../../../../core/services/auth.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
@@ -23,6 +23,8 @@ export class AuthSignUpComponent implements OnInit {
    * https://github.com/angular/angular/issues/12463 */
   @ViewChild('emailElt') emailElt: ElementRef;
   @ViewChild('codeElt') codeElt: ElementRef;
+
+  @Output() showSignIn = new EventEmitter<undefined>();
 
   constructor(private formBuilder: FormBuilder, private authService: AuthService,
               private snackBar: MatSnackBar, private errorService: ErrorService) { }
@@ -62,6 +64,7 @@ export class AuthSignUpComponent implements OnInit {
       next: () => {
         console.log('Email verification successful');
         this.snackBar.open('Successfully signed up. You can now sign in.');
+        this._showSignIn();
       },
       error: err => {
         if (err.code === 'CodeMismatchException') {
@@ -101,6 +104,10 @@ export class AuthSignUpComponent implements OnInit {
       this.passwordConfirm.setErrors([{'passwordMismatch': true}]);
     else
       this.passwordConfirm.setErrors(null);
+  }
+
+  _showSignIn() {
+    this.showSignIn.emit();
   }
 
   // Dev
