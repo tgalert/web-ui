@@ -5,8 +5,7 @@
         <app-auth-sign-up (showSignIn)="selectedTab = 1"></app-auth-sign-up>
       </mat-tab>
       <mat-tab label="Sign In">
-        <app-auth-sign-in></app-auth-sign-in>
-        No account? <a (click)="selectedTab = 0">Sign up</a>
+        <app-auth-sign-in (showSignUp)="selectedTab = 0"></app-auth-sign-in>
       </mat-tab>
     </mat-tab-group>
   </mat-card>

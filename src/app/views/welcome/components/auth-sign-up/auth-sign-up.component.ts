@@ -64,7 +64,7 @@ export class AuthSignUpComponent implements OnInit {
       next: () => {
         console.log('Email verification successful');
         this.snackBar.open('Successfully signed up. You can now sign in.');
-        this._showSignIn();
+        this.showSignIn.emit();
       },
       error: err => {
         if (err.code === 'CodeMismatchException') {
@@ -104,10 +104,6 @@ export class AuthSignUpComponent implements OnInit {
       this.passwordConfirm.setErrors([{'passwordMismatch': true}]);
     else
       this.passwordConfirm.setErrors(null);
-  }
-
-  _showSignIn() {
-    this.showSignIn.emit();
   }
 
   // Dev

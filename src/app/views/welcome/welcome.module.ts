@@ -8,6 +8,7 @@ import { AuthTabsComponent } from './components/auth-tabs/auth-tabs.component';
 import { AuthSignInComponent } from './components/auth-sign-in/auth-sign-in.component';
 import { AuthSignUpComponent } from './components/auth-sign-up/auth-sign-up.component';
 import {ReactiveFormsModule} from '@angular/forms';
+import { ForgotPasswordDialogComponent } from './components/auth-sign-in/forgot-password-dialog/forgot-password-dialog.component';
 
 @NgModule({
   imports: [
@@ -20,7 +21,11 @@ import {ReactiveFormsModule} from '@angular/forms';
     WelcomeComponent,
     AuthTabsComponent,
     AuthSignInComponent,
-    AuthSignUpComponent
+    AuthSignUpComponent,
+    ForgotPasswordDialogComponent
+  ],
+  entryComponents: [
+    ForgotPasswordDialogComponent
   ]
 })
 export class WelcomeModule { }

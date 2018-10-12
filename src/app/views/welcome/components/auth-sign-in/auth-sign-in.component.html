@@ -1,3 +1,29 @@
-<p>
-  auth-sign-in works!
-</p>
+<div>
+  <form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
+
+    <mat-form-field>
+      <input #emailElt matInput placeholder="Email" formControlName="email" required autocomplete="username">
+      <mat-error *ngIf="email.hasError('required')">Email is required</mat-error>
+      <mat-error *ngIf="email.hasError('email')">Please enter a valid email address</mat-error>
+      <mat-error *ngIf="email.invalid && !email.hasError('required') && !email.hasError('email')">No account with this email address exists</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input #passwordElt matInput type="password" placeholder="Password" formControlName="password" required autocomplete="current-password">
+      <mat-error *ngIf="password.hasError('required')">Password is required</mat-error>
+      <mat-error *ngIf="password.invalid && !password.hasError('required')">Password incorrect</mat-error>
+    </mat-form-field>
+
+    <div class="button-container">
+      <button mat-raised-button color="primary" type="submit" [disabled]="signInForm.invalid">Sign In</button>
+    </div>
+
+    <p id="forgot-password">Forgot your password?&nbsp;<a (click)="forgotPassword()">Click here</a></p>
+
+    <p>Form value:<br>{{printFormValue()}}</p>
+    <p>Form status: {{signInForm.status}}</p>
+  </form>
+
+  <p>No account? <a (click)="showSignUp.emit()">Sign up</a></p>
+</div>
+
