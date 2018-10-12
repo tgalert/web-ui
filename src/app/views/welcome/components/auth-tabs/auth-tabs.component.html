@@ -1,10 +1,10 @@
 <div id="auth-tabs-container">
   <mat-card>
     <mat-tab-group mat-stretch-tabs [selectedIndex]="selectedTab" (selectedIndexChange)="onTabChanged($event)">
-      <mat-tab label="Sign Up">
+      <mat-tab label="Sign up">
         <app-sign-up (showSignIn)="selectedTab = 1"></app-sign-up>
       </mat-tab>
-      <mat-tab label="Sign In">
+      <mat-tab label="Sign in">
         <app-sign-in (showSignUp)="selectedTab = 0"></app-sign-in>
       </mat-tab>
     </mat-tab-group>
