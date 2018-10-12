@@ -9,13 +9,15 @@ import { SignInComponent } from './components/auth-tabs/sign-in/sign-in.componen
 import { SignUpComponent } from './components/auth-tabs/sign-up/sign-up.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import { ForgotPasswordDialogComponent } from './components/auth-tabs/sign-in/forgot-password-dialog/forgot-password-dialog.component';
+import {WidgetsModule} from '../../shared/widgets/widgets.module';
 
 @NgModule({
   imports: [
     CommonModule,
     WelcomeRoutingModule,
+    ReactiveFormsModule,
     MaterialModule,
-    ReactiveFormsModule
+    WidgetsModule
   ],
   declarations: [
     WelcomeComponent,

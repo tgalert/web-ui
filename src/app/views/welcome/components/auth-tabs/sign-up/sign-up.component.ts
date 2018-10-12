@@ -16,8 +16,11 @@ export class SignUpComponent implements OnInit {
   signUpForm: FormGroup;
   verificationForm: FormGroup;
 
-  /* Trigger to hide sign-up form and display verification form. */
-  signUpDataSent = false;
+  /* Trigger to display loading spinner */
+  loading = false;
+
+  /* Trigger display code verification form and hide sign-up form */
+  codeVerification = false;
 
   /* Needed in order to programmatically set focus on an input field. See
    * https://github.com/angular/angular/issues/12463 */
@@ -42,12 +45,15 @@ export class SignUpComponent implements OnInit {
   }
 
   onSignUpSubmit() {
+    this.loading = true;
     this.authService.signUp(this.email.value, this.password.value).subscribe({
       next: () => {
+        this.loading = false;
+        this.codeVerification = true;
         console.log('Sign up successful (email verification still required)');
-        this.signUpDataSent = true;
       },
       error: err => {
+        this.loading = false;
         if (err.code === 'UsernameExistsException') {
           this.emailElt.nativeElement.focus();
           this.email.setErrors([{emailAlreadyExists: true}]);
@@ -60,17 +66,25 @@ export class SignUpComponent implements OnInit {
   }
 
   onVerificationSubmit() {
+    this.loading = true;
     this.authService.confirmSignUp(this.email.value, this.code.value).subscribe({
       next: () => {
-        console.log('Email verification successful');
-        this.snackBar.open('Successfully signed up. You can now sign in.');
+        this.loading = false;
+        this.codeVerification = false;
+        this.signUpForm.reset();
+        this.verificationForm.reset();
+        this.snackBar.open('Successfully signed up. You can now sign in.', undefined, {duration: 5000});
         this.showSignIn.emit();
+        console.log('Email verification successful');
       },
       error: err => {
+        this.loading = false;
         if (err.code === 'CodeMismatchException') {
           this.codeElt.nativeElement.focus();
           this.code.setErrors([{invalidVerificationCode: true}]);
           this.snackBar.open('Invalid verification code, please try again.');
+          console.log('Wrong sign-up verification code');
+
         }
         else this.errorService.handleError(err);
       }

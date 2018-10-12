@@ -1,5 +1,8 @@
+<!-- Loading spinner -->
+<app-fullscreen-spinner *ngIf="loading"></app-fullscreen-spinner>
+
 <!-- Sign-up form -->
-<div *ngIf="!signUpDataSent">
+<div *ngIf="!codeVerification">
   <form [formGroup]="signUpForm" (ngSubmit)="onSignUpSubmit()">
 
     <mat-form-field>
@@ -24,7 +27,7 @@
     </mat-form-field>
 
     <div class="button-container">
-      <button mat-raised-button color="primary" type="submit" [disabled]="signUpForm.invalid">Sign Up</button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="signUpForm.invalid || loading">Sign Up</button>
     </div>
 
     <p>Form value:<br>{{printFormValue()}}</p>
@@ -34,11 +37,10 @@
   <p>Already have an account? <a (click)="showSignIn.emit()">Sign in</a></p>
 </div>
 
-
 <!-- Email verification form -->
-<div *ngIf="signUpDataSent">
+<div *ngIf="codeVerification">
   <p id="description">A verification code has been sent to <b>{{email.value}}</b>.</p>
-  <p>Didn't receive the code? <a (click)="resendCode()">Resend</a>.</p>
+  <p>Didn't receive the code? <a (click)="resendCode()">Resend</a></p>
   <form  [formGroup]="verificationForm" (ngSubmit)="onVerificationSubmit()">
 
     <mat-form-field>
@@ -48,7 +50,7 @@
     </mat-form-field>
 
     <div class="button-container">
-      <button mat-raised-button color="primary" type="submit" [disabled]="verificationForm.invalid">Submit</button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="verificationForm.invalid || loading">Submit</button>
     </div>
 
   </form>
