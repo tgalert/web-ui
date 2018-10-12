@@ -5,10 +5,10 @@ import { WelcomeRoutingModule } from './welcome-routing.module';
 import {WelcomeComponent} from './page/welcome.component';
 import {MaterialModule} from '../../shared/material/material.module';
 import { AuthTabsComponent } from './components/auth-tabs/auth-tabs.component';
-import { AuthSignInComponent } from './components/auth-sign-in/auth-sign-in.component';
-import { AuthSignUpComponent } from './components/auth-sign-up/auth-sign-up.component';
+import { SignInComponent } from './components/auth-tabs/sign-in/sign-in.component';
+import { SignUpComponent } from './components/auth-tabs/sign-up/sign-up.component';
 import {ReactiveFormsModule} from '@angular/forms';
-import { ForgotPasswordDialogComponent } from './components/auth-sign-in/forgot-password-dialog/forgot-password-dialog.component';
+import { ForgotPasswordDialogComponent } from './components/auth-tabs/sign-in/forgot-password-dialog/forgot-password-dialog.component';
 
 @NgModule({
   imports: [
@@ -20,8 +20,8 @@ import { ForgotPasswordDialogComponent } from './components/auth-sign-in/forgot-
   declarations: [
     WelcomeComponent,
     AuthTabsComponent,
-    AuthSignInComponent,
-    AuthSignUpComponent,
+    SignInComponent,
+    SignUpComponent,
     ForgotPasswordDialogComponent
   ],
   entryComponents: [

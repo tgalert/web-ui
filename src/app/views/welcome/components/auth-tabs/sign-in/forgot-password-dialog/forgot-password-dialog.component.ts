@@ -1,10 +1,10 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {MatDialogRef, MatSnackBar} from '@angular/material';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {AuthService} from '../../../../../core/services/auth.service';
-import {ErrorService} from '../../../../../core/services/error.service';
-import {passwordMatchValidator} from '../../../../../_helpers/validators';
-import {MIN_PW} from '../../../../../_helpers/constants';
+import {AuthService} from '../../../../../../core/services/auth.service';
+import {ErrorService} from '../../../../../../core/services/error.service';
+import {passwordMatchValidator} from '../../../../../../_helpers/validators';
+import {MIN_PW} from '../../../../../../_helpers/constants';
 
 @Component({
   selector: 'app-forgot-password-dialog',

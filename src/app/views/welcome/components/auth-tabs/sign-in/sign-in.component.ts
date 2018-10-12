@@ -1,17 +1,17 @@
 import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {AuthService} from '../../../../core/services/auth.service';
+import {AuthService} from '../../../../../core/services/auth.service';
 import {MatDialog, MatSnackBar} from '@angular/material';
-import {ErrorService} from '../../../../core/services/error.service';
+import {ErrorService} from '../../../../../core/services/error.service';
 import {Router} from '@angular/router';
 import {ForgotPasswordDialogComponent} from './forgot-password-dialog/forgot-password-dialog.component';
 
 @Component({
-  selector: 'app-auth-sign-in',
-  templateUrl: './auth-sign-in.component.html',
-  styleUrls: ['./auth-sign-in.component.scss']
+  selector: 'app-sign-in',
+  templateUrl: './sign-in.component.html',
+  styleUrls: ['./sign-in.component.scss']
 })
-export class AuthSignInComponent implements OnInit {
+export class SignInComponent implements OnInit {
 
   signInForm: FormGroup;
 

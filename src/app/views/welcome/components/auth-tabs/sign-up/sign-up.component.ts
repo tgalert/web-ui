@@ -1,17 +1,17 @@
 import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {MatSnackBar} from '@angular/material';
-import {AuthService} from '../../../../core/services/auth.service';
+import {AuthService} from '../../../../../core/services/auth.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ErrorService} from '../../../../core/services/error.service';
-import {MIN_PW} from '../../../../_helpers/constants';
-import {passwordMatchValidator} from '../../../../_helpers/validators';
+import {ErrorService} from '../../../../../core/services/error.service';
+import {MIN_PW} from '../../../../../_helpers/constants';
+import {passwordMatchValidator} from '../../../../../_helpers/validators';
 
 @Component({
-  selector: 'app-auth-sign-up',
-  templateUrl: './auth-sign-up.component.html',
-  styleUrls: ['./auth-sign-up.component.scss']
+  selector: 'app-sign-up',
+  templateUrl: './sign-up.component.html',
+  styleUrls: ['./sign-up.component.scss']
 })
-export class AuthSignUpComponent implements OnInit {
+export class SignUpComponent implements OnInit {
 
   signUpForm: FormGroup;
   verificationForm: FormGroup;
