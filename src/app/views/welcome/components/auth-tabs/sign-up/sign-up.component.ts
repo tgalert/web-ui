@@ -119,11 +119,4 @@ export class SignUpComponent implements OnInit {
     else
       this.passwordConfirm.setErrors(null);
   }
-
-  // Dev
-
-  printFormValue() {
-    return JSON.stringify(this.signUpForm.value);
-  }
-
 }

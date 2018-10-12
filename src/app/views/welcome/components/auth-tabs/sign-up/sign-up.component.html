@@ -29,9 +29,6 @@
     <div class="button-container">
       <button mat-raised-button color="primary" type="submit" [disabled]="signUpForm.invalid || loading">Sign Up</button>
     </div>
-
-    <p>Form value:<br>{{printFormValue()}}</p>
-    <p>Form status: {{signUpForm.status}}</p>
   </form>
 
   <p>Already have an account? <a (click)="showSignIn.emit()">Sign in</a></p>

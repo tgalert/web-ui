@@ -71,13 +71,4 @@ export class SignInComponent implements OnInit {
   /* Shorthands for form controls (used by template) */
   get email() { return this.signInForm.get('email'); }
   get password() { return this.signInForm.get('password'); }
-
-
-  // Dev
-
-  printFormValue() {
-    return JSON.stringify(this.signInForm.value);
-  }
-
-
 }
