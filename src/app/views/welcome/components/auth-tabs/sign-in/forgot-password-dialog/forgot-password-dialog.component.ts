@@ -16,6 +16,9 @@ export class ForgotPasswordDialogComponent implements OnInit {
   step1Form: FormGroup;
   step2Form: FormGroup;
 
+  /* Trigger to display loading spinner */
+  loading = false;
+
   /* Triggers to show next form */
   currentStep = 1;
 
@@ -43,12 +46,15 @@ export class ForgotPasswordDialogComponent implements OnInit {
   }
 
   onStep1Submit() {
+    this.loading = true;
     this.authService.forgotPassword(this.email.value).subscribe({
       next: () => {
-        console.log('Verification code sent');
+        this.loading = false;
         this.currentStep = 2;
+        console.log('Verification code sent');
       },
       error: err => {
+        this.loading = false;
         if (err.code === 'UserNotFoundException') {
           this.emailElt.nativeElement.focus();
           this.email.setErrors([{userNotFound: true}]);
@@ -62,13 +68,16 @@ export class ForgotPasswordDialogComponent implements OnInit {
   }
 
   onStep2Submit() {
+    this.loading = true;
     this.authService.forgotPasswordSubmit(this.email.value, this.code.value, this.password.value).subscribe({
       next: () => {
+        this.loading = false;
         console.log('New password saved successfully');
         this.snackBar.open('Password changed successfully. You can now sign in with your new password.', undefined, {duration: 5000});
         this.dialogRef.close();
       },
       error: err => {
+        this.loading = false;
         if (err.code === 'CodeMismatchException') {
           this.codeElt.nativeElement.focus();
           this.code.setErrors([{invalidVerificationCode: true}]);
