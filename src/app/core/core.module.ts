@@ -4,19 +4,25 @@ import { AmplifyService } from 'aws-amplify-angular';
 import {AuthService} from './services/auth.service';
 import {AuthGuard} from './guards/auth.guard';
 import {NoAuthGuard} from './guards/no-auth.guard';
+import { ErrorDialogComponent } from './components/error-dialog/error-dialog.component';
+import {ErrorService} from './services/error.service';
+import {MaterialModule} from '../shared/material/material.module';
 
 
+// TODO: is it ok to leave ErrorDialogComponent in the core module or should it be put in another module?
 @NgModule({
   imports: [
-    CommonModule
+    MaterialModule
   ],
-  declarations: [],
+  declarations: [ErrorDialogComponent],
+  entryComponents: [ErrorDialogComponent],
   providers: [
     // Library services
     AmplifyService,
 
     // Own services
     AuthService,
+    ErrorService,
 
     // Guards
     AuthGuard,
