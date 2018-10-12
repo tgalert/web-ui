@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import {DashboardComponent} from './page/dashboard.component';
 import {MaterialModule} from '../../shared/material/material.module';
+import { ToolbarComponent } from './components/toolbar/toolbar.component';
+import { ToolbarMenuComponent } from './components/toolbar/toolbar-menu/toolbar-menu.component';
 
 @NgModule({
   imports: [
@@ -12,7 +14,9 @@ import {MaterialModule} from '../../shared/material/material.module';
     MaterialModule
   ],
   declarations: [
-    DashboardComponent
+    DashboardComponent,
+    ToolbarComponent,
+    ToolbarMenuComponent
   ]
 })
 export class DashboardModule { }
