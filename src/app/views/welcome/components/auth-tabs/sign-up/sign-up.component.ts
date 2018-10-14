@@ -5,6 +5,8 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ErrorService} from '../../../../../core/services/error.service';
 import {MIN_PW} from '../../../../../_helpers/constants';
 import {passwordMatchValidator} from '../../../../../_helpers/validators';
+import {mergeMap} from 'rxjs/operators';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-sign-up',
@@ -30,7 +32,8 @@ export class SignUpComponent implements OnInit {
   @Output() showSignIn = new EventEmitter<undefined>();
 
   constructor(private formBuilder: FormBuilder, private authService: AuthService,
-              private snackBar: MatSnackBar, private errorService: ErrorService) { }
+              private snackBar: MatSnackBar, private errorService: ErrorService,
+              private router: Router) { }
 
   ngOnInit() {
     this.signUpForm = this.formBuilder.group({
@@ -67,15 +70,17 @@ export class SignUpComponent implements OnInit {
 
   onVerificationSubmit() {
     this.loading = true;
-    this.authService.confirmSignUp(this.email.value, this.code.value).subscribe({
+    this.authService.confirmSignUp(this.email.value, this.code.value).pipe(
+        mergeMap(() => {
+          console.log('Email verification successful');
+          return this.authService.signIn(this.email.value, this.password.value);
+        })
+    ).subscribe({
       next: () => {
-        this.loading = false;
-        this.codeVerification = false;
-        this.signUpForm.reset();
-        this.verificationForm.reset();
-        this.snackBar.open('Successfully signed up. You can now sign in.', undefined, {duration: 5000});
-        this.showSignIn.emit();
-        console.log('Email verification successful');
+        // Since we're navigating away, we don't need to stop the spinner
+        this.router.navigate(['/dashboard']);
+        this.snackBar.open('Your account has been created');
+        console.log('Sign-in successful');
       },
       error: err => {
         this.loading = false;
@@ -84,7 +89,6 @@ export class SignUpComponent implements OnInit {
           this.code.setErrors([{invalidVerificationCode: true}]);
           this.snackBar.open('Invalid verification code, please try again.');
           console.log('Wrong sign-up verification code');
-
         }
         else this.errorService.handleError(err);
       }
