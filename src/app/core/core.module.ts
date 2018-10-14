@@ -20,7 +20,7 @@ import {MAT_SNACK_BAR_DEFAULT_OPTIONS} from '@angular/material';
   providers: [
     // Library services
     AmplifyService,
-    {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2000}},
+    {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 4000}},
 
     // Own services
     AuthService,

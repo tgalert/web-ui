@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AmplifyService } from 'aws-amplify-angular';
 import {from, Observable, of, throwError} from 'rxjs';
-import {catchError, map} from 'rxjs/operators';
+import {catchError, map, mergeMap} from 'rxjs/operators';
 
 
 @Injectable({
@@ -12,7 +12,7 @@ export class AuthService {
   constructor(private amplifyService: AmplifyService) { }
 
   /**
-   * Sign up a new user with an email address and a password.
+   * Sign up a new user with an email address and a newPassword.
    *
    * @param email
    * @param password
@@ -44,7 +44,7 @@ export class AuthService {
   }
 
   /**
-   * Sign in to an existing account with an email and password.
+   * Sign in to an existing account with an email and newPassword.
    *
    * @param email
    * @param password
@@ -63,7 +63,7 @@ export class AuthService {
   }
 
   /**
-   * Initiate a password reset request. A verification code will be sent to the
+   * Initiate a newPassword reset request. A verification code will be sent to the
    * provided email address.
    *
    * @param email
@@ -74,18 +74,18 @@ export class AuthService {
   }
 
   /**
-   * Complete a password reset request. It must contain the new password chosen
+   * Complete a newPassword reset request. It must contain the new newPassword chosen
    * by the user and the verification code and email from 'forgotPassword'.
    *
    * If this request returns successfully, the user can sign in immediately with
-   * the new password.
+   * the new newPassword.
    *
-   * Choosing a new password that is identical to the current password is NOT
+   * Choosing a new newPassword that is identical to the current newPassword is NOT
    * an error.
    *
    * @param email Email to which verification code has been sent by 'forgotPassword'
    * @param code The verification code sent to above email address
-   * @param password The new password chosen by the user
+   * @param password The new newPassword chosen by the user
    */
   public forgotPasswordSubmit(email: string, code: string, password: string) {
     console.log(`AuthService - forgotPasswordSubmit: email: ${email}, code: ${code}, password: ${password}`);
@@ -125,6 +125,14 @@ export class AuthService {
           return {email: info.attributes.email};
         else
           throw 'User not signed-in';
+      })
+    );
+  }
+
+  public changePassword(oldPassword: string, newPassword: string): Observable<any> {
+    return from(this.amplifyService.auth().currentAuthenticatedUser()).pipe(
+      mergeMap(user => {
+        return from(this.amplifyService.auth().changePassword(user, oldPassword, newPassword));
       })
     );
   }
