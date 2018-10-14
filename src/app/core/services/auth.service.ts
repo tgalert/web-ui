@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AmplifyService } from 'aws-amplify-angular';
 import {from, Observable, of, throwError} from 'rxjs';
-import {catchError, map, mergeMap} from 'rxjs/operators';
+import {catchError, map, mergeMap, tap} from 'rxjs/operators';
 
 
 @Injectable({
@@ -18,7 +18,7 @@ export class AuthService {
    * @param password
    */
   public signUp(email: string, password: string): Observable<any> {
-    console.log(`AuthService - signup: email: ${email}, password: ${password}`);
+    console.log(`AuthService - signUp: email: ${email}, password: ${password}`);
     return from(this.amplifyService.auth().signUp(email, password, email));
   }
 
@@ -119,6 +119,7 @@ export class AuthService {
    * object of the form { email }, or throws error if user is not signed-in.
    */
   public getUserInfo(): Observable<any> {
+    console.log(`AuthService - getUserInfo`);
     return from(this.amplifyService.auth().currentUserInfo()).pipe(
       map(info => {
         if (info)
@@ -130,6 +131,7 @@ export class AuthService {
   }
 
   public changePassword(oldPassword: string, newPassword: string): Observable<any> {
+    console.log(`AuthService - changePassword: oldPassword: ${oldPassword}, newPassword: ${newPassword}`);
     return from(this.amplifyService.auth().currentAuthenticatedUser()).pipe(
       mergeMap(user => {
         return from(this.amplifyService.auth().changePassword(user, oldPassword, newPassword));
@@ -138,9 +140,28 @@ export class AuthService {
   }
 
   /**
+   * Delete the currently signed-in user.
+   */
+  public deleteUser(): Observable<any> {
+    console.log(`AuthService - deleteUser`);
+    return from(this.amplifyService.auth().currentAuthenticatedUser()).pipe(
+      mergeMap(user => {
+        return new Observable<any>(observer => {
+          user.deleteUser((err, data) => {
+            if (err) observer.error(err);
+            else observer.next(data);
+            observer.complete();
+          });
+        });
+      })
+    );
+  }
+
+  /**
    * Test if the user is currently signed-in.
    */
   public isSignedIn(): Observable<boolean> {
+    console.log(`AuthService - isSignedIn`);
     /* currentUserInfo() returns:
      *
      * - If signed in: {id, username, attributes: {sub, email_verified, email}}
@@ -155,6 +176,7 @@ export class AuthService {
    * Test if the user is currently signed-in. Alternative to 'isSignedIn()'.
    */
   private isSignedIn2() {
+    console.log(`AuthService - isSignedIn2`);
     /* currentAuthenticatedUser() behaviour:
      *
      * - If signed in: {username, attributes: {sub, email_verified, email},

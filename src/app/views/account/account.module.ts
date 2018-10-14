@@ -9,6 +9,8 @@ import { AccountInfoComponent } from './components/account-info/account-info.com
 import {WidgetsModule} from '../../shared/widgets/widgets.module';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import {ReactiveFormsModule} from '@angular/forms';
+import { DeleteAccountComponent } from './components/delete-account/delete-account.component';
+import { DeleteAccountDialogComponent } from './components/delete-account-dialog/delete-account-dialog.component';
 
 @NgModule({
   imports: [
@@ -18,6 +20,16 @@ import {ReactiveFormsModule} from '@angular/forms';
     MaterialModule,
     WidgetsModule
   ],
-  declarations: [AccountComponent, ToolbarComponent, AccountInfoComponent, ChangePasswordComponent]
+  declarations: [
+    AccountComponent,
+    ToolbarComponent,
+    AccountInfoComponent,
+    ChangePasswordComponent,
+    DeleteAccountComponent,
+    DeleteAccountDialogComponent
+  ],
+  entryComponents: [
+    DeleteAccountDialogComponent
+  ]
 })
 export class AccountModule { }
