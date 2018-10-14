@@ -130,6 +130,15 @@ export class AuthService {
     );
   }
 
+  /**
+   * Changes the password of the currently signed-in user. If the provided
+   * old password is incorrect, throws a 'NotAuthorizedException' error.
+   *
+   * The new password being identical to the old password is NOT an error.
+   *
+   * @param oldPassword The current password of the user
+   * @param newPassword The new password for the user
+   */
   public changePassword(oldPassword: string, newPassword: string): Observable<any> {
     console.log(`AuthService - changePassword: oldPassword: ${oldPassword}, newPassword: ${newPassword}`);
     return from(this.amplifyService.auth().currentAuthenticatedUser()).pipe(

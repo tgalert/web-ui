@@ -1,5 +1,5 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, FormGroupDirective, Validators} from '@angular/forms';
 import {AuthService} from '../../../../core/services/auth.service';
 import {MatSnackBar} from '@angular/material';
 import {ErrorService} from '../../../../core/services/error.service';
@@ -20,6 +20,10 @@ export class ChangePasswordComponent implements OnInit {
   /* Needed in order to programmatically set focus on an input field. See
    * https://github.com/angular/angular/issues/12463 */
   @ViewChild('oldPasswordElt') oldPasswordElt: ElementRef;
+
+  /* To correctly reset change password form after submission, see here:
+   * https://stackoverflow.com/a/49789012/4747193 */
+  @ViewChild(FormGroupDirective) formElt: FormGroupDirective;
 
   constructor(private formBuilder: FormBuilder, private authService: AuthService,
               private snackBar: MatSnackBar, private errorService: ErrorService) { }
@@ -45,8 +49,8 @@ export class ChangePasswordComponent implements OnInit {
     this.authService.changePassword(this.oldPassword.value, this.newPassword.value).subscribe({
       next: () => {
         this.loading = false;
-        this.form.reset();
-        this.snackBar.open('Your password has been changed successfully.');
+        this.formElt.resetForm();
+        this.snackBar.open('Your password has been successfully changed.');
         console.log('Password change successful');
       },
       error: err => {
@@ -70,6 +74,5 @@ export class ChangePasswordComponent implements OnInit {
     else
       this.newPasswordConfirm.setErrors(null);
   }
-
 
 }
