@@ -1,0 +1,17 @@
+<app-fullscreen-spinner *ngIf="loading"></app-fullscreen-spinner>
+
+<app-toolbar></app-toolbar>
+
+<div id="container">
+
+  <div id="nav-button-container">
+    <button mat-raised-button color="primary" (click)="navigateToDashboard()">Back to Dashboard</button>
+  </div>
+
+  <h4>Account information</h4>
+  <mat-card>
+    <app-account-info></app-account-info>
+  </mat-card>
+
+
+</div>

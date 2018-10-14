@@ -35,4 +35,8 @@ export class ToolbarMenuComponent implements OnInit {
     });
   }
 
+  navigateToAccountSettings() {
+    this.loading = true;
+    this.router.navigate(['/account']);
+  }
 }
