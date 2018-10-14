@@ -7,14 +7,17 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import {MaterialModule} from '../../shared/material/material.module';
 import { AccountInfoComponent } from './components/account-info/account-info.component';
 import {WidgetsModule} from '../../shared/widgets/widgets.module';
+import { ChangePasswordComponent } from './components/change-password/change-password.component';
+import {ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   imports: [
     CommonModule,
     AccountRoutingModule,
+    ReactiveFormsModule,
     MaterialModule,
     WidgetsModule
   ],
-  declarations: [AccountComponent, ToolbarComponent, AccountInfoComponent]
+  declarations: [AccountComponent, ToolbarComponent, AccountInfoComponent, ChangePasswordComponent]
 })
 export class AccountModule { }

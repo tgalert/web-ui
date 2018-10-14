@@ -1,9 +1,13 @@
 #container {
-  width: 700px;
+  width: 600px;
   margin: 2em auto;
 }
 
 #nav-button-container {
   display: flex;
   justify-content: flex-end;
+}
+
+.section-header {
+  margin-top: 2em;
 }

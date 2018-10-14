@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AmplifyService } from 'aws-amplify-angular';
-import {from, Observable, of} from 'rxjs';
+import {from, Observable, of, throwError} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
 
 
@@ -112,6 +112,21 @@ export class AuthService {
    */
   public getAuthStateChange(): Observable<{state: string, user: any}> {
     return this.amplifyService.authStateChange$;
+  }
+
+  /**
+   * Get information about the currently signed-in user. Currently, returns an
+   * object of the form { email }, or throws error if user is not signed-in.
+   */
+  public getUserInfo(): Observable<any> {
+    return from(this.amplifyService.auth().currentUserInfo()).pipe(
+      map(info => {
+        if (info)
+          return {email: info.attributes.email};
+        else
+          throw 'User not signed-in';
+      })
+    );
   }
 
   /**
