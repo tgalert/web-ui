@@ -19,7 +19,7 @@
 				"s3TemplateURL": "https://s3.amazonaws.com/moduletest-20181011222608-deployment/amplify-cfn-templates/auth/moduletest-cloudformation-template.yml",
 				"logicalId": "authmoduletest"
 			},
-			"lastPushTimeStamp": "2018-10-11T20:34:05.833Z",
+			"lastPushTimeStamp": "2018-10-14T15:55:16.277Z",
 			"output": {
 				"AppClientSecret": "gv4pepc2hdhkhsinofk38lc15k98irv0ubugneimfgvqe4sjjvh",
 				"UserPoolId": "us-east-1_caEtzyjHJ",
@@ -29,7 +29,26 @@
 				"IdentityPoolName": "moduleteste0af88e2_identitypool_e0af88e2",
 				"UserPoolName": "moduleteste0af88e2_userpool_e0af88e2"
 			},
-			"lastPushDirHash": "GV0JP+SYc88/6inxhzeR8akiLq4="
+			"lastPushDirHash": "jmLmnWC0nYBVpZ0S/V4an03i6Bg=",
+			"[object Object]": {}
+		}
+	},
+	"hosting": {
+		"S3AndCloudFront": {
+			"service": "S3AndCloudFront",
+			"providerPlugin": "awscloudformation",
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/moduletest-20181011222608-deployment/amplify-cfn-templates/hosting/template.json",
+				"logicalId": "hostingS3AndCloudFront"
+			},
+			"lastPushTimeStamp": "2018-10-14T15:55:16.287Z",
+			"output": {
+				"S3BucketSecureURL": "https://moduletest-20181014175315--hostingbucket.s3.amazonaws.com",
+				"WebsiteURL": "http://moduletest-20181014175315--hostingbucket.s3-website-us-east-1.amazonaws.com",
+				"Region": "us-east-1",
+				"HostingBucketName": "moduletest-20181014175315--hostingbucket"
+			},
+			"lastPushDirHash": "KXsJ0Hko9KBEzSDHGHGbmzYCUek="
 		}
 	}
 }
